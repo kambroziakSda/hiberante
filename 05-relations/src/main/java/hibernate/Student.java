@@ -1,5 +1,6 @@
 package hibernate;
 
+import hibernate.listener.StudentEntityEventListener;
 import jakarta.persistence.*;
 
 import java.io.File;
@@ -8,7 +9,19 @@ import java.util.Date;
 
 @Entity
 @Table(name = "tab_student")
+@EntityListeners(value = StudentEntityEventListener.class)
 public class Student {
+
+    public Student(String firstName, String lastName, String pesel, Gender gender, Date birthDate, Address address, LocalDate firstCourseDate, File profileImage) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.pesel = pesel;
+        this.gender = gender;
+        this.birthDate = birthDate;
+        this.address = address;
+        this.firstCourseDate = firstCourseDate;
+        this.profileImage = profileImage;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,5 +58,9 @@ public class Student {
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 '}';
+    }
+
+    public Integer getId() {
+        return id;
     }
 }

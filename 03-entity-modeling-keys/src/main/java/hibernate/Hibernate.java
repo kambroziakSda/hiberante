@@ -5,10 +5,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 /*
-@Table, @Column, @Enumerated, @Temporal, @Convert, @AttributeOverrides
-
- Zadanie:
- Uzywając klasy converter zapisywać w bazie pierwsze znaki Gender
+1. Automatyczne generowanie kluczy
+2. Klucze złożone
  */
 public class Hibernate {
 
@@ -16,6 +14,8 @@ public class Hibernate {
         try (final SessionFactory sessionFactory = new Configuration()
                 .configure("hibernate.cfg.xml")
                 .addAnnotatedClass(Student.class)
+                .addAnnotatedClass(Manager.class)
+                .addAnnotatedClass(Trainer.class)
                 .buildSessionFactory()) {
 
             try(Session session = sessionFactory.openSession()) {
