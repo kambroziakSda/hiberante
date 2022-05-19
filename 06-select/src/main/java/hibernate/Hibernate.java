@@ -9,6 +9,7 @@ import java.io.File;
 import java.net.URISyntaxException;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.Set;
 
 /*
 1. OneToOne
@@ -26,16 +27,24 @@ public class Hibernate {
                 .addAnnotatedClass(Student.class)
                 .addAnnotatedClass(Manager.class)
                 .addAnnotatedClass(Trainer.class)
+                .addAnnotatedClass(Grade.class)
+                .addAnnotatedClass(Academy.class)
+                .addAnnotatedClass(AcademyDetails.class)
                 .buildSessionFactory()) {
 
             try(Session session = sessionFactory.openSession()) {
                 Transaction transaction = session.beginTransaction();
 
-                Student student = new Student("Jan", "Kowalski", "123", Gender.FEMALE, new Date(), new Address("Gdańsk", "Grunwaldzka")
+                Student student = new Student("Jan", "Kowalski", "1237788", Gender.FEMALE, new Date(), new Address("Gdańsk", "Grunwaldzka")
                         , LocalDate.now(), new File(Hibernate.class.getResource("/hibernate.cfg.xml").toURI()));
 
                 session.persist(student);
-                session.save(student);
+
+                Trainer trainer = new Trainer(new NamePk("Jan", "Kowalski"));
+                Academy academy = new Academy("SDA", Set.of(trainer), new AcademyDetails("123"));
+                session.persist(academy);
+
+
                 transaction.commit();
 
             } catch (URISyntaxException e) {

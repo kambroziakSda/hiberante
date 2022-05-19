@@ -10,22 +10,19 @@ public class Academy {
     @Id
     private String name;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private AcademyDetails academyDetails;
 
-    @ManyToMany
-    @JoinTable(name = "academy_student",
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(name = "academy_trainer",
             joinColumns = { @JoinColumn(name = "idacademy") },
-            inverseJoinColumns = { @JoinColumn(name = "idstudent") })
+            inverseJoinColumns = { @JoinColumn(name = "first_name"), @JoinColumn(name = "last_name") })
 
-    //ważne żeby mapować jako set a nie list
-    //https://thorben-janssen.com/association-mappings-bag-list-set/
-    private Set<Student> students;
+    private Set<Trainer> trainers;
 
-
-    public Academy(String name, Set<Student>  students, AcademyDetails academyDetails) {
+    public Academy(String name, Set<Trainer>  trainers, AcademyDetails academyDetails) {
         this.name = name;
-        this.students = students;
+        this.trainers = trainers;
         this.academyDetails = academyDetails;
 
     }
@@ -34,7 +31,6 @@ public class Academy {
     public String toString() {
         return "Academy{" +
                 "name='" + name + '\'' +
-                ", students=" + students +
                 '}';
     }
 }

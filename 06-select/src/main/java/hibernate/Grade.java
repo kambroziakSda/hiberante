@@ -14,8 +14,9 @@ public class Grade {
     private int value;
 
     @ManyToOne
-    @JoinColumn(name = "idteacher")
-    private Trainer teacher;
+    @JoinColumn(name = "first_name")
+    @JoinColumn(name = "last_name")
+    private Trainer trainer;
 
     @ManyToOne
     @JoinColumn(name = "idstudent")
@@ -26,9 +27,9 @@ public class Grade {
     private Grade() {
     }
 
-    public Grade(int value, Trainer teacher, Student student, LocalDateTime createTime) {
+    public Grade(int value, Trainer trainer, Student student, LocalDateTime createTime) {
         this.value = value;
-        this.teacher = teacher;
+        this.trainer = trainer;
         this.student = student;
         this.createTime = createTime;
     }
@@ -42,7 +43,7 @@ public class Grade {
         return "Grade{" +
                 "id=" + id +
                 ", value=" + value +
-                ", teacher=" + teacher +
+                ", teacher=" + trainer +
                 ", student=" + student.getId() +
                 ", createTime=" + createTime +
                 '}';

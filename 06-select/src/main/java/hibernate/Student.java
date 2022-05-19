@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import java.io.File;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "tab_student")
@@ -48,6 +49,9 @@ public class Student {
     private Address address;
 
     private LocalDate firstCourseDate;
+
+    @OneToMany(mappedBy = "student", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    private List<Grade> grades;
 
     @Convert(converter = FileConverter.class)
     private File profileImage;

@@ -9,5 +9,7 @@ public class AcademyDetails {
     @Id
     private String nip;
 
-
+    public AcademyDetails(String nip) {
+        this.nip = nip;
+    }
 }
