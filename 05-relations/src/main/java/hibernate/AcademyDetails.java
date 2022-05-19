@@ -9,5 +9,14 @@ public class AcademyDetails {
     @Id
     private String nip;
 
+    public AcademyDetails(String nip) {
+        this.nip = nip;
+    }
 
+    @Override
+    public String toString() {
+        return "AcademyDetails{" +
+                "nip='" + nip + '\'' +
+                '}';
+    }
 }

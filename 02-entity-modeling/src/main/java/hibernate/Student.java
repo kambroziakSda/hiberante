@@ -1,6 +1,8 @@
 package hibernate;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 import java.io.File;
 import java.time.LocalDate;
@@ -10,9 +12,9 @@ import java.util.Date;
 @Table(name = "tab_student")
 public class Student {
 
-
-    private Integer id;
     @Id
+    private Integer id;
+
     private String firstName;
     private String lastName;
     private String pesel;

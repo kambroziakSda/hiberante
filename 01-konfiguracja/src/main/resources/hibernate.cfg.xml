@@ -16,7 +16,7 @@
 
 
         <property name="jakarta.persistence.schema-generation.database.action">drop-and-create</property>
-        <!-- możliwe wartości none (default value), create-only, drop, create, create-drop, validate, and update-->
+        <!-- możliwe wartości none (default value), create, drop, create-drop, validate, update-->
         <!--<property name="jakarta.persistence.schema-generation.database.action">none</property>--> <!-- for production use! -->
 
         <property name="jakarta.persistence.schema-generation.create-source">script</property>

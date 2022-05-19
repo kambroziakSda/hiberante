@@ -2,20 +2,15 @@ package hibernate;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
-import java.io.File;
-import java.net.URISyntaxException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
-
 /*
-@Table, @Column, @Enumerated, @Temporal, @Convert, @AttributeOverrides
+@Table, @Column, @Enumerated, @Temporal, @Convert, @AttributeOverrides, @MappedSuperclass
 
  Zadanie:
- Uzywając klasy converter zapisywać w bazie pierwsze znaki Gender
+ 1. Zamodelować encję Academy z polami: name (max 20 znakow), address, startDate (zapis tylko daty), mainLanguage z możliwymi wartościami: JAVA, PYTHON, SCALA
+ a nastepnie dodać do sessionFactory
+ 2. Uzywając klasy converter zapisywać w bazie pierwsze znaki Gender w encji Student
  */
 public class Hibernate {
 

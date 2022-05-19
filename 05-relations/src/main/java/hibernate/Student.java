@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 
 import java.io.File;
 import java.time.LocalDate;
-import java.util.Date;
+import java.util.*;
 
 @Entity
 @Table(name = "tab_student")
@@ -52,6 +52,11 @@ public class Student {
     @Convert(converter = FileConverter.class)
     private File profileImage;
 
+    private Academy academy;
+
+    List<Grade> gradeList = new ArrayList<>();
+
+
     @Override
     public String toString() {
         return "Student{" +
@@ -62,5 +67,13 @@ public class Student {
 
     public Integer getId() {
         return id;
+    }
+
+    public Academy getAcademy() {
+        return academy;
+    }
+
+    public List<Grade> getGradeList() {
+        return gradeList;
     }
 }

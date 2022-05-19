@@ -9,14 +9,19 @@ import java.io.File;
 import java.net.URISyntaxException;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 /*
-1. OneToOne
-2. OneToMany/ManyToOne
-3. ManyToMany
-4. CascadePersist
-5. Właścicielstwo relacji
-Zadanie: zapisywanie adresu studenta jako encji w relacji 1:n z encją Student
+0. Kazda relacja może byc jedno lub dwukierunkowa
+1. OneToOne: Academy -> AcademyDetails
+2. Właścicielstwo relacji
+3. OneToMany/ManyToOne: Grade -> Student
+4. ManyToMany: Academy <-> Trainer
+5. Cascades
+Zadania:
+1. Utworzenie relacji 1:1 Student -> StudentCard
+2. Utworzenie relacji OneToMany/ManyToOne: Academy -> Student
+3. Zamodelowanie usuwania wszystkich studentów gdy zostanie usunięta encja Academy
  */
 public class Hibernate {
 
@@ -26,6 +31,9 @@ public class Hibernate {
                 .addAnnotatedClass(Student.class)
                 .addAnnotatedClass(Manager.class)
                 .addAnnotatedClass(Trainer.class)
+                .addAnnotatedClass(Academy.class)
+                .addAnnotatedClass(Grade.class)
+                .addAnnotatedClass(AcademyDetails.class)
                 .buildSessionFactory()) {
 
             try(Session session = sessionFactory.openSession()) {
@@ -34,9 +42,24 @@ public class Hibernate {
                 Student student = new Student("Jan", "Kowalski", "123", Gender.FEMALE, new Date(), new Address("Gdańsk", "Grunwaldzka")
                         , LocalDate.now(), new File(Hibernate.class.getResource("/hibernate.cfg.xml").toURI()));
 
+
+
+                Grade grade = new Grade(student,3);
+                Grade grade2 = new Grade(student,4);
+                student.getGradeList().addAll(List.of(grade,grade2));
+
                 session.persist(student);
-                session.save(student);
+                /*session.persist(grade);
+                session.persist(grade2);*/
+
                 transaction.commit();
+                /*Transaction transaction2 = session.beginTransaction();
+                Grade grade1 = session.find(Grade.class, 1);
+                Student student1 = session.find(Student.class, 1);
+
+                session.remove(student1);
+
+                transaction2.commit();*/
 
             } catch (URISyntaxException e) {
 

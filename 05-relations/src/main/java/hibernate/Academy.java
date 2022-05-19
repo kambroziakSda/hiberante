@@ -2,6 +2,8 @@ package hibernate;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -10,22 +12,16 @@ public class Academy {
     @Id
     private String name;
 
-    @OneToOne
+    private LocalDateTime createTime;
+
     private AcademyDetails academyDetails;
 
-    @ManyToMany
-    @JoinTable(name = "academy_student",
-            joinColumns = { @JoinColumn(name = "idacademy") },
-            inverseJoinColumns = { @JoinColumn(name = "idstudent") })
-
-    //ważne żeby mapować jako set a nie list
-    //https://thorben-janssen.com/association-mappings-bag-list-set/
     private Set<Student> students;
 
 
-    public Academy(String name, Set<Student>  students, AcademyDetails academyDetails) {
+    public Academy(String name,  AcademyDetails academyDetails) {
         this.name = name;
-        this.students = students;
+        this.students = new HashSet<>();
         this.academyDetails = academyDetails;
 
     }
@@ -37,4 +33,14 @@ public class Academy {
                 ", students=" + students +
                 '}';
     }
+
+    public Set<Student> getStudents() {
+        return students;
+    }
+
+    @PrePersist
+    public void prePersist(){
+        createTime = LocalDateTime.now();
+    }
+
 }

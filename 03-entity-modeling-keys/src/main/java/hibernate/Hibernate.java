@@ -6,7 +6,9 @@ import org.hibernate.cfg.Configuration;
 
 /*
 1. Automatyczne generowanie kluczy
-2. Klucze złożone
+2. Klucze złożone na przykładzie Trainer oraz Manager
+
+Zadanie: Zamienic za pomocą odpowiedniej adnotacji lastName na surename w encji gdzie klucz jest jako EmbededId
  */
 public class Hibernate {
 
