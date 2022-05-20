@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 
 import java.io.File;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -13,7 +14,10 @@ import java.util.List;
 @EntityListeners(value = StudentEntityEventListener.class)
 public class Student {
 
-    public Student(String firstName, String lastName, String pesel, Gender gender, Date birthDate, Address address, LocalDate firstCourseDate, File profileImage) {
+    public Student() {
+    }
+
+    public Student(String firstName, String lastName, String pesel, Gender gender, Date birthDate, Address address, LocalDate firstCourseDate, File profileImage, Academy academy) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.pesel = pesel;
@@ -22,6 +26,7 @@ public class Student {
         this.address = address;
         this.firstCourseDate = firstCourseDate;
         this.profileImage = profileImage;
+        this.academy = academy;
     }
 
     @Id
@@ -38,8 +43,12 @@ public class Student {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
+    @OneToOne(mappedBy = "student")
+    private StudentCard studentCard;
+
     @Temporal(value = TemporalType.DATE)
     private Date birthDate;
+
 
     @Embedded
     @AttributeOverrides({
@@ -51,10 +60,14 @@ public class Student {
     private LocalDate firstCourseDate;
 
     @OneToMany(mappedBy = "student", cascade = CascadeType.PERSIST, orphanRemoval = true)
-    private List<Grade> grades;
+    private List<Grade> grades = new ArrayList<>();
 
     @Convert(converter = FileConverter.class)
     private File profileImage;
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "idacademy")
+    private Academy academy;
 
     @Override
     public String toString() {
@@ -66,5 +79,9 @@ public class Student {
 
     public Integer getId() {
         return id;
+    }
+
+    public List<Grade> getGrades() {
+        return grades;
     }
 }

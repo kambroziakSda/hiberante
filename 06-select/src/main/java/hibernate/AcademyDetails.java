@@ -6,6 +6,9 @@ import jakarta.persistence.Id;
 @Entity
 public class AcademyDetails {
 
+    public AcademyDetails() {
+    }
+
     @Id
     private String nip;
 
