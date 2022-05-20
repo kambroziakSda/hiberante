@@ -12,12 +12,9 @@
         <module>01-konfiguracja</module>
         <module>02-entity-modeling</module>
         <module>03-entity-modeling-keys</module>
-        <module>04-persist</module>
         <module>05-relations</module>
         <module>06-select</module>
         <module>07-update</module>
-        <module>08-delete</module>
-        <module>09-cascades</module>
         <module>99-project</module>
     </modules>
 
