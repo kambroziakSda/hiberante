@@ -1,21 +1,16 @@
 package hibernate;
 
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.query.Query;
-import org.hibernate.query.criteria.HibernateCriteriaBuilder;
 
 import java.io.File;
 import java.net.URISyntaxException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Collections;
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
 /*
@@ -29,7 +24,7 @@ Zadanie:
 Napisz zapytanie HQL ktore znajdzie studentow zamieszkałych w Gdansku
 
  */
-public class Hibernate {
+public class Hibernate06 {
 
     public static void main(String[] args) {
         try (final SessionFactory sessionFactory = new Configuration()
@@ -50,10 +45,10 @@ public class Hibernate {
                 Academy academy = new Academy("SDA", Set.of(trainer), new AcademyDetails("1234"));
                 Academy academy2 = new Academy("Coder", Set.of(trainer2), new AcademyDetails("987"));
                 Student student = new Student("Jan", "Kowalski", "1237788", Gender.FEMALE, new Date(), new Address("Gdańsk", "Grunwaldzka")
-                        , LocalDate.now(), new File(Hibernate.class.getResource("/hibernate.cfg.xml").toURI()), academy);
+                        , LocalDate.now(), new File(Hibernate06.class.getResource("/hibernate.cfg.xml").toURI()), academy);
 
                 Student student2 = new Student("Jan2", "Kowalski2", "12377882", Gender.FEMALE, new Date(), new Address("Gdańsk", "Grunwaldzka")
-                        , LocalDate.now(), new File(Hibernate.class.getResource("/hibernate.cfg.xml").toURI()), academy2);
+                        , LocalDate.now(), new File(Hibernate06.class.getResource("/hibernate.cfg.xml").toURI()), academy2);
 
                 Grade grade = new Grade(1, trainer, student, LocalDateTime.now());
                 Grade grade2 = new Grade(2, trainer, student, LocalDateTime.now());
@@ -119,8 +114,6 @@ public class Hibernate {
             System.out.println("Pobranie średniej z kazdej akademii wraz z listą ocen"); // native query
             try (Session session = sessionFactory.openSession()) {
                 EntityManager unwrap = session.unwrap(EntityManager.class);
-
-                CriteriaBuilder criteriaBuilder = unwrap.getCriteriaBuilder();
 
             }
 

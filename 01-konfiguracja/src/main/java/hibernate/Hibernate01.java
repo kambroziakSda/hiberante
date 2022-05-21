@@ -13,7 +13,7 @@ package hibernate;
 Zadanie:
 Dopisanie do studenta nazwiska
  */
-public class Hibernate {
+public class Hibernate01 {
 
     public static void main(String[] args) {
 

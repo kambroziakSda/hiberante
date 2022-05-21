@@ -12,7 +12,7 @@ import org.hibernate.cfg.Configuration;
  a nastepnie dodać do sessionFactory
  2. Uzywając klasy converter zapisywać w bazie pierwsze znaki Gender w encji Student
  */
-public class Hibernate {
+public class Hibernate02 {
 
     public static void main(String[] args) {
         try (final SessionFactory sessionFactory = new Configuration()

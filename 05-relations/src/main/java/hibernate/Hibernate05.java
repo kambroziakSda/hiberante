@@ -23,7 +23,7 @@ Zadania:
 2. Utworzenie relacji OneToMany/ManyToOne: Academy -> Student
 3. Zamodelowanie usuwania wszystkich studentów gdy zostanie usunięta encja Academy
  */
-public class Hibernate {
+public class Hibernate05 {
 
     public static void main(String[] args) {
         try (final SessionFactory sessionFactory = new Configuration()
@@ -40,7 +40,7 @@ public class Hibernate {
                 Transaction transaction = session.beginTransaction();
 
                 Student student = new Student("Jan", "Kowalski", "123", Gender.FEMALE, new Date(), new Address("Gdańsk", "Grunwaldzka")
-                        , LocalDate.now(), new File(Hibernate.class.getResource("/hibernate.cfg.xml").toURI()));
+                        , LocalDate.now(), new File(Hibernate05.class.getResource("/hibernate.cfg.xml").toURI()));
 
 
 

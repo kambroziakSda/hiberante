@@ -3,7 +3,7 @@ package hibernate;
 import java.sql.*;
 
 
-public class Hibernate {
+public class JDBC {
 
     public static void main(String[] args) throws SQLException {
         Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hibernate-arp?characterEncoding=utf8&serverTimezone=UTC", "root", "root");
