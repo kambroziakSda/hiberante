@@ -15,6 +15,7 @@
         <module>05-relations</module>
         <module>06-select</module>
         <module>07-update</module>
+        <module>08-inheritance</module>
         <module>99-project</module>
     </modules>
 
