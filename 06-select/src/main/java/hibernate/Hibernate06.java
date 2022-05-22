@@ -39,6 +39,8 @@ public class Hibernate06 {
                 .buildSessionFactory()) {
 
             try (Session session = sessionFactory.openSession()) {
+                EntityManager entityManager = session.unwrap(EntityManager.class);
+
                 Transaction transaction = session.beginTransaction();
                 Trainer trainer = new Trainer(new NamePk("Jan", "Trenerski"));
                 Trainer trainer2 = new Trainer(new NamePk("Paweł", "Sprawdzalski"));
@@ -60,8 +62,8 @@ public class Hibernate06 {
                 student.getGrades().addAll(Set.of(grade, grade2, grade3, grade4, grade5));
                 student2.getGrades().add(grade6);
 
-                session.persist(student);
-                session.persist(student2);
+                entityManager.persist(student);
+                entityManager.persist(student2);
 
                 transaction.commit();
 
