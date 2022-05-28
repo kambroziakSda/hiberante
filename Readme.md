@@ -1,4 +1,4 @@
-# Hibernate - źródła, informacje dodatkowe
+# Hibernate and more - źródła, informacje dodatkowe
 ## Dokumentacja
 - [Dokumentacja](https://docs.jboss.org/hibernate/orm/6.0/userguide/html_single/Hibernate_User_Guide.html#configurations-strategy)
 ### Konfiguracja
