@@ -11,13 +11,24 @@
 - [CriteriaApi](https://thorben-janssen.com/hibernate-tip-left-join-fetch-join-criteriaquery/)
 ### JDBC
 - [Tutorial](https://jenkov.com/tutorials/jdbc/index.html)
-- [Projekt do samodzielnej analizy]()
+- [Projekt do samodzielnej analizy](https://github.com/kambroziakSda/jdbcExercise)
 
 # Hibernate Q&A
 ## Narzędzia podobne do hibernate?
 ### [Eclipselink - kolejna implementacja JPA](https://www.eclipse.org/eclipselink/)
 ### [MyBatis](https://mybatis.org/mybatis-3/)
 
-## Co to jest port?
-## Aplikacja wielowarstwowa - gdzie jest hiberante?
-## try-with-resources?
+
+## try-with-resources
+### [Link](https://docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html)
+
+## Java Reflection API
+### [Link](https://www.baeldung.com/java-reflection)
+
+## Wersjonowanie bazy danych
+### [Liqibase](https://www.liquibase.org/)
+### [Flayway](https://flywaydb.org/)
+
+## Ciekawe materiały
+### [DevUpgrade Online](https://devupgrade.online/)
+### [S Sobótka - "Persistowanie 'prawdziwych' obiektów" (zaawansowane)](https://www.youtube.com/watch?v=uj25PbkHb94)
