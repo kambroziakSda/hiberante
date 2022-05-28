@@ -8,14 +8,16 @@ import java.time.LocalDateTime;
 public class Grade {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private int value;
 
 
-    private Trainer trainer;
+    //private Trainer trainer;
 
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "student_id",foreignKey = @ForeignKey(name = "grade-student"))
     private Student student;
 
     private LocalDateTime createTime;
@@ -34,7 +36,7 @@ public class Grade {
 
     public Grade(int value, Trainer teacher, Student student, LocalDateTime createTime) {
         this.value = value;
-        this.trainer = teacher;
+        //this.trainer = teacher;
         this.student = student;
         this.createTime = createTime;
     }
@@ -48,7 +50,7 @@ public class Grade {
         return "Grade{" +
                 "id=" + id +
                 ", value=" + value +
-                ", teacher=" + trainer +
+                //", teacher=" + trainer +
                 ", student=" + student.getId() +
                 ", createTime=" + createTime +
                 '}';

@@ -1,9 +1,6 @@
 package hibernate;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.MappedSuperclass;
-import jakarta.persistence.PostLoad;
-import jakarta.persistence.PrePersist;
+import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 @MappedSuperclass
@@ -18,6 +15,16 @@ public class BaseEntity {
     public void prePersist(){
         System.out.println("PrePersist executed!");
         createTime = LocalDateTime.now();
+    }
+
+    @PreRemove
+    public void preRemove(){
+        System.out.println("Before entity remove!");
+    }
+
+    @PostRemove
+    public void postRemove(){
+        System.out.println("Entity removed!");
     }
 
 

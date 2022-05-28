@@ -12,7 +12,7 @@ import java.util.*;
 @EntityListeners(value = StudentEntityEventListener.class)
 public class Student {
 
-    public Student(String firstName, String lastName, String pesel, Gender gender, Date birthDate, Address address, LocalDate firstCourseDate, File profileImage) {
+    public Student(String firstName, String lastName, String pesel, Gender gender, Date birthDate, Address address, LocalDate firstCourseDate, File profileImage, StudentCard studentCard) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.pesel = pesel;
@@ -21,6 +21,10 @@ public class Student {
         this.address = address;
         this.firstCourseDate = firstCourseDate;
         this.profileImage = profileImage;
+        this.studentCard = studentCard;
+    }
+
+    Student() {
     }
 
     @Id
@@ -52,10 +56,22 @@ public class Student {
     @Convert(converter = FileConverter.class)
     private File profileImage;
 
+    // Encja student jest właścicielem relacji student-studentCard bo w niej zdefiniowany jest klucz obcy (adnotacja JoinColumn)
+    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "id_student_cards")
+    private StudentCard studentCard;
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "id_academy", foreignKey = @ForeignKey(name = "student-academy-fk"))
     private Academy academy;
 
-    List<Grade> gradeList = new ArrayList<>();
-
+    //orphanRemoval - powoduje usuniecie z bazy jesli usuwamy obiekt encji z listy
+    @OneToMany(mappedBy = "student", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
+    private List<Grade> gradeList = new ArrayList<>();
 
     @Override
     public String toString() {
@@ -69,11 +85,19 @@ public class Student {
         return id;
     }
 
-    public Academy getAcademy() {
-        return academy;
+    public StudentCard getStudentCard() {
+        return studentCard;
     }
+
+      public Academy getAcademy() {
+          return academy;
+      }
 
     public List<Grade> getGradeList() {
         return gradeList;
+    }
+
+    public void setAcademy(Academy academy) {
+        this.academy = academy;
     }
 }

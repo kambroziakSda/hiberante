@@ -18,6 +18,14 @@ public class NamePk implements Serializable {
 
     private String lastName;
 
+    public NamePk() {
+    }
+
+    public NamePk(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

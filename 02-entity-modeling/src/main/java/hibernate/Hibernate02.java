@@ -30,6 +30,8 @@ public class Hibernate02 {
                 .addAnnotatedClass(Manager.class)
                 .buildSessionFactory()) {
 
+            NamePk trainerName = new NamePk("Adam", "Nowak");
+
             try (Session session = sessionFactory.openSession()) {
                 Transaction transaction = session.beginTransaction();
                 File profileImage = Paths.get("C:/profile/image").toFile();
@@ -40,19 +42,58 @@ public class Hibernate02 {
 
 
                 Academy academy = new Academy("Coder", new Address("Sopot", "Powstańców Warszawy"), LocalDate.of(2022, 1, 1), Language.JAVA);
-
+                Trainer trainer = new Trainer(trainerName, 40);
+                Manager manager = new Manager("Adam", "Kowalski", 50);
 
                 session.persist(academy);
                 session.persist(student);
+                session.persist(trainer);
+                session.persist(manager);
+
                 transaction.commit();
             }
 
 
+            NamePk managerName = new NamePk("Adam", "Kowalski");
             try (Session session = sessionFactory.openSession()) {
                 boolean connected = session.isConnected();
-                Student student = session.find(Student.class, 1);
                 System.out.println("Contected: " + connected);
+
+                Student student = session.find(Student.class, 1);
                 System.out.println("Student: " + student);
+
+                Trainer trainer = session.find(Trainer.class, trainerName);
+
+                System.out.println("Trainer: " + trainer);
+
+                Manager manager = session.find(Manager.class, managerName);
+
+                System.out.println("Manager: " + manager);
+            }
+            System.out.println("Before remove operations");
+            try (Session session = sessionFactory.openSession()) {
+                Transaction transaction = session.beginTransaction();
+                Student student = session.find(Student.class, 1);
+                session.remove(student);
+                transaction.commit();
+                student = session.find(Student.class, 1);
+                System.out.println("Is student removed? " + (student == null));
+
+                System.out.println("Before trainer remove");
+                Transaction transaction1 = session.beginTransaction();
+                Trainer trainer = session.find(Trainer.class, trainerName);
+                session.remove(trainer);
+                transaction1.commit();
+                trainer = session.find(Trainer.class, trainerName);
+                System.out.println("Is trainer removed? " + (trainer == null));
+
+                System.out.println("Before manager remove");
+                Transaction transaction2 = session.beginTransaction();
+                Manager manager = session.find(Manager.class, managerName);
+                session.remove(manager);
+                transaction2.commit();
+                manager = session.find(Manager.class, managerName);
+                System.out.println("Is manager removed? " + (manager == null));
             }
 
         }
