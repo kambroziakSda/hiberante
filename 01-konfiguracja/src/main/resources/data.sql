@@ -1,1 +1,1 @@
-insert into student (id,firstname) values (1,'Jan')
+insert into student (id,firstname, lastname, age) values (1,'Jan', 'Kowalski', 20)

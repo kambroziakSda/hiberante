@@ -15,14 +15,21 @@
         <property name="hibernate.format_sql">true</property>
 
 
+
+        <!--Hibernate dropuje baze danych i twrzoy na nowo -->
         <property name="jakarta.persistence.schema-generation.database.action">drop-and-create</property>
         <!-- możliwe wartości none (default value), create, drop, create-drop, validate, update-->
         <!--<property name="jakarta.persistence.schema-generation.database.action">none</property>--> <!-- for production use! -->
 
-        <property name="jakarta.persistence.schema-generation.create-source">script</property>
+        <!-- Wykonaj akcje tworzenia bazy z punktu pierwszego za pomocą skryptu -->
+<!--        <property name="jakarta.persistence.schema-generation.create-source">script</property>-->
+
+        <property name="jakarta.persistence.schema-generation.create-source">metadata</property>
         <!-- możliwe wartości: metadata, metadata-then-script, script, script-then-metadata -->
         <property name="jakarta.persistence.schema-generation.create-script-source">schema-generation.sql</property>
-        <property name="jakarta.persistence.schema-generation.drop-source">script</property>
+
+        <!-- Wykonaj akcje czyszczenia bazy z punktu pierwszego za pomocą skryptu -->
+        <property name="jakarta.persistence.schema-generation.drop-source">metadata</property>
         <!-- możliwe wartości: metadata, metadata-then-script, script, script-then-metadata -->
         <property name="jakarta.persistence.schema-generation.drop-script-source">schema-drop.sql</property>
 

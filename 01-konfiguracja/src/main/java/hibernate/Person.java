@@ -4,34 +4,29 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
 @Entity
-public class Student {
+//Hibernate nie wymaga getterów i setterów więc dopóki logika aplikacji ich nie potrzebuje to nie trzeba ich dodawać
+public class Person {
 
     @Id
-    private Integer id;
+    private int id;
+
     private String firstName;
 
     private String lastName;
 
     private Integer age;
 
-    public Integer getId() {
-        return id;
-    }
+    private String gender;
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
+    private String address;
 
     @Override
     public String toString() {
-        return "Student{" +
+        return "Person{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
+                ", age=" + age +
+                ", gender='" + gender + '\'' +
                 '}';
     }
 }

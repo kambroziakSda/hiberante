@@ -18,6 +18,7 @@
         <module>08-inheritance</module>
         <module>99-project</module>
         <module>00-init</module>
+        <module>01-example</module>
     </modules>
 
     <properties>
@@ -40,5 +41,12 @@
             <artifactId>slf4j-reload4j</artifactId>
             <version>1.7.36</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.3.5</version>
+        </dependency>
+
     </dependencies>
 </project>

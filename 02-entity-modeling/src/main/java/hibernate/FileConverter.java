@@ -8,6 +8,7 @@ import java.nio.file.Paths;
 
 @Converter
 public class FileConverter implements AttributeConverter<File, String> {
+
     @Override
     public String convertToDatabaseColumn(File attribute) {
         if (attribute == null) {
@@ -17,11 +18,11 @@ public class FileConverter implements AttributeConverter<File, String> {
     }
 
     @Override
-    public File convertToEntityAttribute(String dbData) {
-        if (dbData == null) {
+    public File convertToEntityAttribute(String path) {
+        if (path == null) {
             return null;
         }
-        return Paths.get(dbData).toFile();
+        return Paths.get(path).toFile();
     }
 
 }

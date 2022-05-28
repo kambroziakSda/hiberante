@@ -1,1 +1,1 @@
-CREATE TABLE student (id integer primary key,firstname varchar(255) NOT NULL);
+CREATE TABLE student (id integer primary key,firstname varchar(255) NOT NULL, lastname varchar(255) NOT NULL);

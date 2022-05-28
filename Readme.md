@@ -9,4 +9,15 @@
 ### CRUD
 - [Name native query](https://thorben-janssen.com/jpa-native-queries/)
 - [CriteriaApi](https://thorben-janssen.com/hibernate-tip-left-join-fetch-join-criteriaquery/)
-- 
+### JDBC
+- [Tutorial](https://jenkov.com/tutorials/jdbc/index.html)
+- [Projekt do samodzielnej analizy]()
+
+# Hibernate Q&A
+## Narzędzia podobne do hibernate?
+### [Eclipselink - kolejna implementacja JPA](https://www.eclipse.org/eclipselink/)
+### [MyBatis](https://mybatis.org/mybatis-3/)
+
+## Co to jest port?
+## Aplikacja wielowarstwowa - gdzie jest hiberante?
+## try-with-resources?
