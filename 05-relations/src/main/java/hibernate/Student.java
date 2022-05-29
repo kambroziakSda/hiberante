@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 
 import java.io.File;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Entity
@@ -23,6 +24,7 @@ public class Student {
         this.profileImage = profileImage;
         this.studentCard = studentCard;
     }
+
 
     Student() {
     }
@@ -61,6 +63,12 @@ public class Student {
     @JoinColumn(name = "id_student_cards")
     private StudentCard studentCard;
 
+    private LocalDateTime lastModifiedTime;
+
+    // Optimistic Locking
+    @Version
+    private int version;
+
     public String getFirstName() {
         return firstName;
     }
@@ -72,6 +80,18 @@ public class Student {
     //orphanRemoval - powoduje usuniecie z bazy jesli usuwamy obiekt encji z listy
     @OneToMany(mappedBy = "student", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
     private List<Grade> gradeList = new ArrayList<>();
+
+
+    @PostUpdate
+    public void postUpdate() {
+        System.out.println("Entity updated!");
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        lastModifiedTime = LocalDateTime.now();
+        System.out.println("PreUpdate");
+    }
 
     @Override
     public String toString() {
@@ -89,9 +109,9 @@ public class Student {
         return studentCard;
     }
 
-      public Academy getAcademy() {
-          return academy;
-      }
+    public Academy getAcademy() {
+        return academy;
+    }
 
     public List<Grade> getGradeList() {
         return gradeList;
@@ -99,5 +119,9 @@ public class Student {
 
     public void setAcademy(Academy academy) {
         this.academy = academy;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 }

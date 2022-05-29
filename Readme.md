@@ -9,9 +9,13 @@
 ### CRUD
 - [Name native query](https://thorben-janssen.com/jpa-native-queries/)
 - [CriteriaApi](https://thorben-janssen.com/hibernate-tip-left-join-fetch-join-criteriaquery/)
+- [Locking](https://vladmihalcea.com/hibernate-locking-patterns-how-do-pessimistic_read-and-pessimistic_write-work/)
 ### JDBC
 - [Tutorial](https://jenkov.com/tutorials/jdbc/index.html)
 - [Projekt do samodzielnej analizy](https://github.com/kambroziakSda/jdbcExercise)
+
+
+
 
 # Hibernate Q&A
 ## Narzędzia podobne do hibernate?

@@ -1,5 +1,6 @@
 package hibernate;
 
+import jakarta.persistence.LockModeType;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -141,6 +142,7 @@ public class Hibernate05 {
 
             }
             System.out.println("Before academy-trainer persist");
+            // TODO: 29.05.2022 można dla treningu ustawić Cascade.PERSIST w encji Academy nad polem z trenerami po to żeby nie trzeba było osobno zapisywać trenerów
             try (Session session = sessionFactory.openSession()) {
                 Transaction transaction = session.beginTransaction();
                 Academy bestCoders = new Academy("Best Coders", new AcademyDetails("001"));
@@ -150,7 +152,6 @@ public class Hibernate05 {
 
                 session.persist(trainer);
                 session.persist(trainer2);
-
                 bestCoders.getTrainers().addAll(List.of(trainer, trainer2));
                 session.persist(bestCoders);
                 codeMasters.getTrainers().addAll(List.of(trainer, trainer2));
@@ -158,32 +159,35 @@ public class Hibernate05 {
                 transaction.commit();
 
             }
+            System.out.println("Before academy repository");
+            try (Session session = sessionFactory.openSession();
+                 AcademyRepository academyRepository = new AcademyRepository(session)) {
 
+                academyRepository.saveAcademy("Kodzik", "007");
 
-//            try(Session session = sessionFactory.openSession()) {
-//                Transaction transaction = session.beginTransaction();
-//
-//                Student student = new Student("Jan", "Kowalski", "123", Gender.FEMALE, new Date(), new Address("Gdańsk", "Grunwaldzka")
-//                        , LocalDate.now(), new File(Hibernate05.class.getResource("/hibernate.cfg.xml").toURI()));
-//
-//
-//
-//                Grade grade = new Grade(student,3);
-//                Grade grade2 = new Grade(student,4);
-//                student.getGradeList().addAll(List.of(grade,grade2));
-//
-//                session.persist(student);
-//                /*session.persist(grade);
-//                session.persist(grade2);*/
-//
-//                transaction.commit();
-                /*Transaction transaction2 = session.beginTransaction();
-                Grade grade1 = session.find(Grade.class, 1);
-                Student student1 = session.find(Student.class, 1);
+                boolean removed = academyRepository.removeAcademy("Kodzik");
 
-                session.remove(student1);
+                System.out.println("Academy kodzik removed: " + removed);
+            }
 
-                transaction2.commit();*/
+            System.out.println("Aktualizacja adresu studenta");
+            // Podczas update zastosowanie ma mechanizm Optimistic Locking jesli encja ma pole z adnotacją @Version
+            // inna opcja to Pesimistic Locking
+            // do update hibernate wykorzystuje mechanizm dirty checking
+            try (Session session = sessionFactory.openSession()) {
+                Transaction transaction = session.beginTransaction();
+                Student newStudent = session.find(Student.class, 1, LockModeType.PESSIMISTIC_WRITE);
+                newStudent.setAddress(new Address("Sopot", "Monciak"));
+                //session.update(newStudent); - to wywołanie jest niepotrzebne Hibernate robi update automatycznie gdy wykryhe zmiany na encji
+                transaction.commit();
+
+//                Student academyStudent = new Student("Krzysztof", "Kowalski", "9876543", Gender.MALE, new Date(), new Address("Gdańsk", "Jana PAwła II")
+//                        , LocalDate.of(2022, 5, 1), null, new StudentCard(LocalDate.of(2030, 1, 1)));
+//                session.persist(academyStudent);
+//
+//                academyStudent.setAddress(new Address("X","Y"));
+
+            }
 
         }
 
