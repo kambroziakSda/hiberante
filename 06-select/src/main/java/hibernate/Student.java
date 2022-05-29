@@ -12,7 +12,14 @@ import java.util.List;
 @Entity
 @Table(name = "tab_student")
 @EntityListeners(value = StudentEntityEventListener.class)
+@NamedQueries({
+        @NamedQuery(name = Student.STUDENT_BY_ACADEMY, query = "SELECT e from Student e WHERE e.academy = :academy "),
+        @NamedQuery(name = Student.STUDENT_IN_ACADEMY, query = "SELECT new hibernate.StudentInAcademy(e.firstName, e.lastName, e.academy.name) from Student e")
+})
 public class Student {
+
+    public static final String STUDENT_BY_ACADEMY = "Student.byAcademy";
+    public static final String STUDENT_IN_ACADEMY = "Student.inAcademy";
 
     public Student() {
     }

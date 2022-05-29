@@ -3,6 +3,11 @@ package hibernate;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.NonUniqueResultException;
+import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -137,37 +142,100 @@ public class Hibernate06 {
                     System.out.println("Academy from HQL: " + academy);
                 } catch (NoResultException e) {
                     System.out.println("Academy not found for name: " + academyName);
-                } catch (NonUniqueResultException e2){
+                } catch (NonUniqueResultException e2) {
                     System.out.println("Many academies found for name: " + academyName);
                 }
 
             }
 
+            try (Session session = sessionFactory.openSession()) {
+                Query<Grade> query = session.createNamedQuery(Grade.GRADE_GREATHER_THAN, Grade.class)
+                        .setParameter("grade_value", 4);
+            }
 
             System.out.println("Pobieranie wszystkich trenerów z danej akademii"); //NamedQuery/getByReference
             try (Session session = sessionFactory.openSession()) {
-                //System.out.println("Trainers in academy sda: " + trainers.size());
+
+                // getReference nie generuje zbędnych sqli - uzywane jesli jestesmy pewni ze rekord o podanym id istnieje w bazie
+                Academy academy = session.getReference(Academy.class, "SDA");
+
+                List<Trainer> trainers = session.createNamedQuery(Trainer.TRAINER_BY_ACADEMY, Trainer.class)
+                        .setParameter("academy", academy)
+                        .getResultList();
+
+                System.out.println("Trainers in academy sda: " + trainers.size());
 
             }
             //Zadanie:
             //Za pomocą namedQuery pobrać studentów z danej akademii
+            try (Session session = sessionFactory.openSession()) {
+                Academy coder = session.getReference(Academy.class, "Coder");
+                Query<Student> query = session.createNamedQuery(Student.STUDENT_BY_ACADEMY, Student.class)
+                        .setParameter("academy", coder);
+
+                List<Student> students = query.getResultList();
+
+                System.out.println("Students in coder: " + students.size());
+
+            }
 
 
             System.out.println("Pobieranie wszystkich trenerów z danej akademii tylko naziwska"); // select new
             try (Session session = sessionFactory.openSession()) {
+                List<TrainerInAcademy> trainerInAcademies = session.createNamedQuery(Trainer.TRAINER_IN_ACADEMY, TrainerInAcademy.class)
+                        .getResultList();
 
+                trainerInAcademies.forEach(System.out::println);
 
             }
             //Zadanie:
             //Zaimplementować analogie dla studentów w akademii
 
-            System.out.println("Pobranie średniej z kazdej akademii wraz z listą ocen"); // native query
             try (Session session = sessionFactory.openSession()) {
-                EntityManager unwrap = session.unwrap(EntityManager.class);
+                List<StudentInAcademy> studentInAcademies = session.createNamedQuery(Student.STUDENT_IN_ACADEMY, StudentInAcademy.class)
+                        .getResultList();
+
+                studentInAcademies.forEach(System.out::println);
 
             }
 
             System.out.println("CriteriaApi");
+            try (Session session = sessionFactory.openSession()) {
+                EntityManager jpaEntityManager = session.unwrap(EntityManager.class);
+
+                CriteriaBuilder criteriaBuilder = jpaEntityManager.getCriteriaBuilder();
+                CriteriaQuery<Grade> query = criteriaBuilder.createQuery(Grade.class);
+                Root<Grade> from = query.from(Grade.class);
+
+                Predicate ge4 = criteriaBuilder.ge(from.get("value"), 4);
+                Predicate le4 = criteriaBuilder.le(from.get("value"), 4);
+
+                CriteriaQuery<Grade> select = query.select(from);
+                if (LocalDateTime.now().getMinute() % 2 == 0) {
+                    select.where(ge4);
+                } else {
+                    select.where(le4);
+                }
+
+
+                TypedQuery<Grade> typedQuery = jpaEntityManager.createQuery(query);
+                List<Grade> resultList = typedQuery.getResultList();
+
+                System.out.println("All grades count: " + resultList.size());
+
+            }
+
+            System.out.println("Pobranie średniej z kazdej akademii wraz z listą ocen"); // native query
+            try (Session session = sessionFactory.openSession()) {
+                List<Object[]> resultList = session.createNativeQuery("select * from tab_student")
+                        .getResultList();
+
+                for (Object[] objects : resultList) {
+                    System.out.println("Id: " + objects[0]);
+                    System.out.println("City: " + objects[1]);
+                    System.out.println("Steet: " + objects[2]);
+                }
+            }
 
 
         }

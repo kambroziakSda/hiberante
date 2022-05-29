@@ -7,8 +7,11 @@ import org.hibernate.annotations.FetchMode;
 import java.time.LocalDateTime;
 
 @Entity
+// nazwa uzywana w NamedQuery musi byc unikalna w całej aplikacji
+@NamedQueries(@NamedQuery(name = Grade.GRADE_GREATHER_THAN, query = "SELECT x from Grade x WHERE x.value > :grade_value "))
 public class Grade {
 
+    public static final String GRADE_GREATHER_THAN = "Grade.greatherThan";
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;

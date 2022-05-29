@@ -10,7 +10,7 @@ import java.util.Set;
         @NamedQuery(name = Trainer.TRAINER_BY_ACADEMY, query = "" +
                 "SELECT e from Trainer e JOIN e.academies a WHERE a = :academy"),
         @NamedQuery(name = Trainer.TRAINER_IN_ACADEMY, query = "" +
-                "SELECT new hibernate.TrainerInAcademy(e.namePk.lastName, a.name) from Trainer e JOIN e.academies a WHERE a = :academy")
+                "SELECT new hibernate.TrainerInAcademy(e.namePk.lastName, a.name) from Trainer e JOIN e.academies a ")
 })
 public class Trainer {
 
