@@ -158,6 +158,12 @@ public class Hibernate05 {
                 session.persist(codeMasters);
                 transaction.commit();
 
+                // usunięcie trenner2 z codeMasters
+                Transaction beginTransaction = session.beginTransaction();
+                codeMasters.getTrainers().remove(trainer2);
+                beginTransaction.commit();
+
+
             }
             System.out.println("Before academy repository");
             try (Session session = sessionFactory.openSession();

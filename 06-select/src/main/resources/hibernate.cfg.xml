@@ -11,8 +11,10 @@
         <property name="hibernate.connection.password">root</property>
         <!-- Klasa pozwalająca na generowanie optymalnych zapytań pod konkretną bazę, hibernate potrafi sam ją dobrać na podstawie info w połączeniu do bazy -->
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-        <!--<property name="hibernate.show_sql">true</property>
-        <property name="hibernate.format_sql">true</property>-->
+
+       <!-- Jeśli chcemy mieć logowane również wartości parametrów to tą konfiguracje trzeba wyłączyć -->
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.format_sql">true</property>
 
         <property name="jakarta.persistence.schema-generation.database.action">drop-and-create</property>
         <property name="jakarta.persistence.schema-generation.create-source">metadata</property>

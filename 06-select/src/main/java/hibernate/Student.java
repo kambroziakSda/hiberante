@@ -43,7 +43,7 @@ public class Student {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    @OneToOne(mappedBy = "student")
+    @OneToOne(mappedBy = "student", fetch = FetchType.LAZY)
     private StudentCard studentCard;
 
     @Temporal(value = TemporalType.DATE)
@@ -65,7 +65,7 @@ public class Student {
     @Convert(converter = FileConverter.class)
     private File profileImage;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     @JoinColumn(name = "idacademy")
     private Academy academy;
 

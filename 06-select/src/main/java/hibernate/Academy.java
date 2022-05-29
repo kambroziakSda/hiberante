@@ -27,7 +27,7 @@ public class Academy {
     @Id
     private String name;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private AcademyDetails academyDetails;
 
     @ManyToMany(cascade = CascadeType.PERSIST)

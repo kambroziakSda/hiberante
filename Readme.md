@@ -14,9 +14,6 @@
 - [Tutorial](https://jenkov.com/tutorials/jdbc/index.html)
 - [Projekt do samodzielnej analizy](https://github.com/kambroziakSda/jdbcExercise)
 
-
-
-
 # Hibernate Q&A
 ## Narzędzia podobne do hibernate?
 ### [Eclipselink - kolejna implementacja JPA](https://www.eclipse.org/eclipselink/)
