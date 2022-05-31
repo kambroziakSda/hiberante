@@ -1742,3 +1742,147 @@
        add constraint FKt87xhn8nftmfugx4pxsqaf6v9 
        foreign key (idacademy) 
        references Academy (name);
+
+    create table Grade (
+       type varchar(31) not null,
+        id integer not null,
+        maxValue integer,
+        value integer,
+        description varchar(255),
+        primary key (id)
+    ) engine=InnoDB;
+
+    create table Grade_SEQ (
+       next_val bigint
+    ) engine=InnoDB;
+
+    insert into Grade_SEQ values ( 1 );
+
+    create table Grade (
+       type varchar(31) not null,
+        id integer not null,
+        maxValue integer,
+        value integer,
+        description varchar(255),
+        primary key (id)
+    ) engine=InnoDB;
+
+    create table Grade_SEQ (
+       next_val bigint
+    ) engine=InnoDB;
+
+    insert into Grade_SEQ values ( 1 );
+
+    create table tab_grade (
+       type varchar(31) not null,
+        id integer not null,
+        maxValue integer,
+        value integer,
+        description varchar(255),
+        primary key (id)
+    ) engine=InnoDB;
+
+    create table tab_grade_SEQ (
+       next_val bigint
+    ) engine=InnoDB;
+
+    insert into tab_grade_SEQ values ( 1 );
+
+    create table tab_grade (
+       type varchar(31) not null,
+        id integer not null,
+        maxValue integer,
+        value integer,
+        description varchar(255),
+        primary key (id)
+    ) engine=InnoDB;
+
+    create table tab_grade_SEQ (
+       next_val bigint
+    ) engine=InnoDB;
+
+    insert into tab_grade_SEQ values ( 1 );
+
+    create table tab_grade (
+       type varchar(31) not null,
+        id integer not null auto_increment,
+        maxValue integer,
+        value integer,
+        description varchar(255),
+        primary key (id)
+    ) engine=InnoDB;
+
+    create table tab_grade (
+       type varchar(31) not null,
+        id integer not null auto_increment,
+        max_grade integer,
+        value integer,
+        description varchar(255),
+        primary key (id)
+    ) engine=InnoDB;
+
+    create table tab_grade (
+       type varchar(31) not null,
+        id integer not null auto_increment,
+        max_value integer,
+        value integer,
+        description varchar(255),
+        primary key (id)
+    ) engine=InnoDB;
+
+    create table tab_grade (
+       type varchar(31) not null,
+        id integer not null auto_increment,
+        max_value integer,
+        value integer,
+        description varchar(255),
+        primary key (id)
+    ) engine=InnoDB;
+
+    create table NumberGrade (
+       max_value integer,
+        value integer not null,
+        id integer not null,
+        primary key (id)
+    ) engine=InnoDB;
+
+    create table tab_grade (
+       type varchar(31) not null,
+        id integer not null auto_increment,
+        primary key (id)
+    ) engine=InnoDB;
+
+    create table TextGrade (
+       description varchar(255),
+        id integer not null,
+        primary key (id)
+    ) engine=InnoDB;
+
+    alter table NumberGrade 
+       add constraint FKbo6yntgrcmg6dckfocy3i68mq 
+       foreign key (id) 
+       references tab_grade (id);
+
+    alter table TextGrade 
+       add constraint FK6h05yitfr9et39w6o16vm016i 
+       foreign key (id) 
+       references tab_grade (id);
+
+    create table NumberGrade (
+       id integer not null,
+        max_value integer,
+        value integer not null,
+        primary key (id)
+    ) engine=InnoDB;
+
+    create table tab_grade_SEQ (
+       next_val bigint
+    ) engine=InnoDB;
+
+    insert into tab_grade_SEQ values ( 1 );
+
+    create table TextGrade (
+       id integer not null,
+        description varchar(255),
+        primary key (id)
+    ) engine=InnoDB;
