@@ -113,6 +113,7 @@ public class Hibernate05 {
 
                 System.out.println("Before grade from list remove");
 
+
                 Transaction transaction1 = session.beginTransaction();
                 Student s = session.find(Student.class, newStudent.getId());
                 Grade grade5 = session.find(Grade.class, grade.getId());

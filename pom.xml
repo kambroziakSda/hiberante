@@ -19,6 +19,7 @@
         <module>99-project</module>
         <module>00-init</module>
         <module>01-example</module>
+        <module>09-only-jpa</module>
     </modules>
 
     <properties>

@@ -30,6 +30,10 @@
 ### [Liqibase](https://www.liquibase.org/)
 ### [Flayway](https://flywaydb.org/)
 
+## Idea IntellliJ
+### [Skróty (yt)](https://www.youtube.com/watch?v=QYO5_riePOQ)
+### [Skróty (lista)](https://resources.jetbrains.com/storage/products/intellij-idea/docs/IntelliJIDEA_ReferenceCard.pdf)
 ## Ciekawe materiały
 ### [DevUpgrade Online](https://devupgrade.online/)
 ### [S Sobótka - "Persistowanie 'prawdziwych' obiektów" (zaawansowane)](https://www.youtube.com/watch?v=uj25PbkHb94)
+
